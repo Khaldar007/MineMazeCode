@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>///trying
 //resize
+
 room_width = (Cell_Width/16)*720;
 room_height = (Cell_Height/16)*720;
 
@@ -38,7 +39,7 @@ var height = room_height div Cell_Height;
 grid = ds_grid_create(width, height);
 
 //fill the grid with the void
-ds_grid_set_region(grid, 0,0, width -1, height -1, Mine);
+//ds_grid_set_region(grid, 0,0, width -1, height -1, Floor);
 
 //randomising the world
 randomize();
@@ -54,155 +55,111 @@ instance_create(cx*Cell_Width+Cell_Width/2, cy*Cell_Height+Cell_Height/2, Player
 var cdir= irandom(3);
 var bchance = irandom(3);
 var wallchance = irandom(6);
-var xchance = irandom(45);
-var ychance = irandom(45);
+
+var ExitXchance = irandom_range(-16, 16);
+var ExitYchance = irandom_range(-16, 16);
 var choosex = irandom(1);
 var choosey = irandom(1);
 // the odds variable for changing direction
 var odds = 1;
 
+cx = 0;
+cy = 0;
 //create the level using 1000 steps
-repeat (2000){
+repeat (2025){
 
 //place a floor tile at the controller position
-grid[# cx, cy] = Floor;
+
+//grid[# cx, cy] = Floor;
 
 //randomize the direction of the controller
-    if (irandom(odds) == odds) {
-    cdir = irandom(3);
+
+    if (cx &lt;= 45) and (cy &lt;= 45){
+    cx = cx + 1;
+
+    grid[# cx, cy] = Floor;
+    
+
+    
+    }          
+    if (cx = 45){
+    cy = cy + 1;
+    cx = 0
+    
     }
-    //move the controller
-   
-    var xdir = lengthdir_x(1, cdir*90);
-    var ydir = lengthdir_y(1, cdir*90);
-    cx += xdir;
-    cy += ydir;
-    
-    //make sure we dont move outside the grid
-    cx = clamp(cx, 1, width -2);
-    cy = clamp(cy, 1, height -2);
-    
-}
+    }
 
 yy=0
 
+
+
+
 //place the exit
 if (choosex = 0){
-            xchance = irandom_range(0, 16) ;
+            xchance = irandom_range(0, 14) ;
+
             }
 if (choosex = 1){
-            xchance = irandom_range(0, -16) ;
+            xchance = irandom_range(30, 44) ;
+
             }
 if (choosey = 0){
-            xchance = irandom_range(0,16);
+            ychance = irandom_range(0,14);
+
             }
 if (choosey = 1){
-            xchance = irandom_range(0, -16) ;
+            ychance = irandom_range(30, 44) ;
+
             }
 
-                    
+       
+instance_create(xchance*(1*Cell_Width), ychance*(1*Cell_Height), Exit_Object);
 
 grid[# xchance, ychance] = Exit;
-grid[# xchance+1, ychance] = Floor;
-grid[# xchance-1, ychance] = Floor;
-grid[# xchance, ychance+1] = Floor;
-grid[# xchance, ychance-1] = Floor;
-
-//make the floors and walls
-for (var yy = 1; yy &lt; height-1 yy++) {
-
-    for (var xx=1; xx &lt;width-1; xx++) {
-        if (grid[# xx, yy] == Floor){
-            if (irandom(odds) == odds) {
-            wallchance = irandom(7);
-            }
-            if (wallchance = 1){
-            grid[# xx+1, yy] = Wall;
-            grid[# xx-1, yy] = Wall;
-            grid[# xx, yy+1] = Wall;
-            grid[# xx, yy-1] = Wall;
-            }
-            if (wallchance = 2){
-            grid[# xx+1, yy] = Wall;
-            grid[# xx, yy-1] = Wall;
-            grid[# xx, yy+1] = Floor;
-            grid[# xx-1, yy] = Floor;
-            }
-            if (wallchance = 3){
-            grid[# xx+1, yy] = Floor;
-            grid[# xx-1, yy] = Wall;
-            grid[# xx, yy+1] = Wall;
-            grid[# xx, yy-1] = Floor;
-            }
-            if (wallchance = 4){
-            grid[# xx+1, yy] = Floor;
-            grid[# xx-1, yy] = Wall;
-            grid[# xx, yy+1] = Floor;
-            grid[# xx, yy-1] = Wall;
-            }
-            if (wallchance = 5){
-            grid[# xx+1, yy] = Floor;
-            grid[# xx-1, yy] = Floor;
-            grid[# xx, yy+1] = Floor;
-            grid[# xx, yy-1] = Floor;
-            }
-            if (wallchance = 6){
-            grid[# xx+1, yy] = Wall;
-            grid[# xx-1, yy] = Floor;
-            grid[# xx, yy+1] = Wall;
-            grid[# xx, yy-1] = Floor;
-            }
-            if (wallchance = 7){
-            grid[# xx+1, yy] = Floor;
-            grid[# xx-1, yy] = Floor;
-            grid[# xx, yy+1] = Floor;
-            grid[# xx, yy-1] = Floor;
-            }
-            //if (grid[# xx+1, yy] != Floor) grid[# xx+1, yy] = Wall;          
-            //if (grid[# xx-1, yy] != Floor) grid[# xx-1, yy] = Wall;
-            //if (grid[# xx, yy+1] != Floor) grid[# xx, yy+1] = Wall;
-            //if (grid[# xx, yy-1] != Floor) grid[# xx, yy-1] = Wall;
-            //or (grid[# xx+1, yy] != Mine)
-            //or (grid[# xx-1, yy] != Mine)
-            //or (grid[# xx, yy+1] != Mine)
-            //or (grid[# xx, yy-1] != Mine)
-        } 
-
-    }
-
-}
+grid[# xchance + 1, ychance] = Floor;
+grid[# xchance - 1, ychance] = Floor;
+grid[# xchance, ychance + 1] = Floor;
+grid[# xchance, ychance - 1] = Floor;
+grid[# 22, 22] = Start;
+grid[# 21, 22] = Start;
+grid[# 23, 22] = Start;
+grid[# 22, 21] = Start;
+grid[# 22, 23] = Start;
 
 //draw the level
 tile_add(background5, 0, 0, Cell_Width, Cell_Height, xchance*Cell_Width, ychance*Cell_Height, 0);
+;
 for (var yy=0; yy &lt; height; yy++){
     for (var xx = 0; xx &lt; width; xx++){
-        if(grid[# xx, yy] == Floor) {
-            if (irandom(odds) = odds) {
-            bchance = irandom(3);
-            }
- tile_add(background5, 0, 0, Cell_Width, Cell_Height, xchance*Cell_Width, ychance*Cell_Height, 0);           
-            tile_add(background0, 0, 0, Cell_Width, Cell_Height, xx*Cell_Width, yy*Cell_Height, 0)
-           }            
-         else if (grid[# xx, yy] == Wall) {
-         if (irandom(odds) == odds) {
-        bchance = irandom(3);
+    wallchance = irandom(5)
+        if(grid[# xx, yy] == Floor){ 
+        
+        if (wallchance = 0){
+        instance_create(xx*Cell_Width, yy*Cell_Height, wall_object) 
         }
-        if (bchance = 1){
-         tile_add(backgroundwall, 0, 0, Cell_Width, Cell_Height, xx*Cell_Width, yy*Cell_Height, 0)
-         }
-         if (bchance = 2){
-         tile_add(backgroundwall, 0, 0, Cell_Width, Cell_Height, xx*Cell_Width, yy*Cell_Height, 0)
-         }
-         if (bchance = 3){
-         tile_add(bomb, 0, 0, Cell_Width, Cell_Height, xx*Cell_Width, yy*Cell_Height, 0)
-         }
-         }
+        if (wallchance = 1){
+        //tile_add(background0, 0, 0, Cell_Width, Cell_Height, xx*Cell_Width, yy*Cell_Height, 0)
+        }
+        if (wallchance = 2){
+        //tile_add(background0, 0, 0, Cell_Width, Cell_Height, xx*Cell_Width, yy*Cell_Height, 0)
+        }
+        if (wallchance = 3){
+        instance_create(xx*Cell_Width, yy*Cell_Height, bombwall) 
+        }
+        if (wallchance = 4){
+        //tile_add(background0, 0, 0, Cell_Width, Cell_Height, xx*Cell_Width, yy*Cell_Height, 0)
+        }
+        if (wallchance = 5){
+        instance_create(xx*Cell_Width, yy*Cell_Height, wall_object) 
+        }                       
+           }
          
-  tile_add(background5, 0, 0, Cell_Width, Cell_Height, xchance*Cell_Width, ychance*Cell_Height, 0);       
+      
+      
         
     }
 }
-tile_add(background5, 0, 0, Cell_Width, Cell_Height, xchance*Cell_Width, ychance*Cell_Height, 0);
+//tile_add(background0, 0, 0, Cell_Width, Cell_Height, 22*Cell_Width, 22*Cell_Height, 0)
 </string>
           </argument>
         </arguments>
@@ -227,6 +184,8 @@ tile_add(background5, 0, 0, Cell_Width, Cell_Height, xchance*Cell_Width, ychance
             <kind>1</kind>
             <string>/// Restart the room
 room_restart();
+
+
 </string>
           </argument>
         </arguments>
