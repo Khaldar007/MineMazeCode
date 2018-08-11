@@ -54,6 +54,7 @@ y = view_yview + 10;
             <string>x = view_xview;
 y = view_yview;
 draw_set_color(c_white);
+draw_set_font(small_font);
 draw_sprite(score_background, 0, x , y );
 draw_text(x + 22, y +14, global.points);
 

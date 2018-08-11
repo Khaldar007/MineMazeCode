@@ -6,28 +6,76 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\player</sprite>
+    <sprite>sprites\playerlowrisk</sprite>
+    <sprite>sprites\Arrow</sprite>
+    <sprite>sprites\PlayerAttack</sprite>
+    <sprite>sprites\playeridle</sprite>
+    <sprite>sprites\playerdown</sprite>
+    <sprite>sprites\PlayerLeftDown</sprite>
+    <sprite>sprites\PlayerLeftUp</sprite>
+    <sprite>sprites\PlayerRightUp</sprite>
+    <sprite>sprites\PlayerRightDown</sprite>
+    <sprite>sprites\playerleft</sprite>
+    <sprite>sprites\playerup</sprite>
+    <sprite>sprites\playerright</sprite>
+    <sprite>sprites\Exit</sprite>
+    <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_bomb</sprite>
+    <sprite>sprites\newfloor</sprite>
+    <sprite>sprites\sprite15</sprite>
+    <sprite>sprites\sprite16</sprite>
+    <sprite>sprites\highbombrisk</sprite>
+    <sprite>sprites\playermedrisk</sprite>
+    <sprite>sprites\playergreentrail</sprite>
+    <sprite>sprites\playermedtrail</sprite>
+    <sprite>sprites\playerhighrisk</sprite>
+    <sprite>sprites\blackdeath</sprite>
+    <sprite>sprites\select_obj</sprite>
+    <sprite>sprites\sprite25</sprite>
+    <sprite>sprites\playersmallrisk</sprite>
+    <sprite>sprites\score_background</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
     <background>background\backgroundwall</background>
     <background>background\background5</background>
     <background>background\bomb</background>
+    <background>background\gameover</background>
+    <background>background\background6</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
+    <script>scripts\scr_menu.gml</script>
     <script>scripts\move.gml</script>
     <script>scripts\grid_place_meeting.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\big_font</font>
+    <font>fonts\small_font</font>
+    <font>fonts\menu_font</font>
+  </fonts>
   <objects name="objects">
+    <object>objects\Menu_obj</object>
     <object>objects\level</object>
     <object>objects\Player_Object</object>
+    <object>objects\Exit_Object</object>
+    <object>objects\wall_object</object>
+    <object>objects\floortile</object>
+    <object>objects\bombwall</object>
+    <object>objects\obj_highrisk</object>
+    <object>objects\obj_medrisk</object>
+    <object>objects\obj_lowrisk</object>
+    <object>objects\obj_End</object>
+    <object>objects\obj_Win</object>
+    <object>objects\trail</object>
+    <object>objects\score</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\room</room>
     <room>rooms\room1</room>
   </rooms>
   <constants number="7">
-    <constant name="Exit">-9</constant>
+    <constant name="Start">-4</constant>
     <constant name="Void">-7</constant>
     <constant name="Cell_Width">32</constant>
     <constant name="Floor">-5</constant>
